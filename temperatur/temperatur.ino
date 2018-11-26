@@ -23,13 +23,10 @@ float hum;  //humidity
 float temp; //temperature
 
 void handleRoot() {
-  digitalWrite(led, 1);
   server.send(200, "text/plain", "hello from esp8266!");
-  digitalWrite(led, 0);
 }
 
 void handleNotFound() {
-  digitalWrite(led, 1);
   String message = "File Not Found\n\n";
   message += "URI: ";
   message += server.uri();
@@ -42,16 +39,12 @@ void handleNotFound() {
     message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
   }
   server.send(404, "text/plain", message);
-  digitalWrite(led, 0);
 }
 
 void getTempHumValues(){
   hum = dht.readHumidity();
   temp = dht.readTemperature();
-
-  String httpmessage = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>";
-  httpmessage += temp;
-  httpmessage += "</html>";
+  server.send(200, "text/plain", (String) temp);
 }
 
 void setup()
@@ -74,8 +67,12 @@ void setup()
 
   server.on("/", handleRoot);
 
-  sever.on("/temp", getTempHumValues);
-
+  server.on("/temp", getTempHumValues);
+  
+  server.onNotFound(handleNotFound);
+  server.begin();
+  Serial.println("HTTP server started");
+  
 /*  server.begin();
   if(WiFi.status() != WL_CONNECTED){
     Serial.println("Error with WiFI Connection");
