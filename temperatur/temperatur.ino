@@ -9,42 +9,47 @@
 #define DHTPIN 13 // pin we're connected to
 #define DHTTYPE DHT22
 DHT dht(DHTPIN, DHTTYPE); 
-const char* ssid = "iPhoneX Kai 2018";
-const char* password = "test12345";
+const char* ssid = "iPhoneX Kai 2018"; // SSID  of Access Point 
+const char* password = "test12345"; // Password of Access Point
 
 ESP8266WebServer server(80);
 
-String data;
-
-
 //Variables
-int chk;
 float hum;  //humidity 
 float temp; //temperature
 
+/*
+ * Function for handling empty routes
+ */
 void handleRoot() {
-  server.send(200, "text/plain", "hello from esp8266!");
+  server.send(200, "text/plain", "this server works!");
 }
 
+/*
+ * Function for handling Uri's that don't exist
+ * 
+ */
 void handleNotFound() {
-  String message = "File Not Found\n\n";
+  String message = "File Not Found\n\n"; // Declaring server response message
   message += "URI: ";
-  message += server.uri();
-  message += "\nMethod: ";
-  message += (server.method() == HTTP_GET) ? "GET" : "POST";
+  message += server.uri(); // Adding URI to response message
+  message += "\nMethod: "; 
+  message += (server.method() == HTTP_GET) ? "GET" : "POST"; // Adding Method to reponse message
   message += "\nArguments: ";
-  message += server.args();
+  message += server.args(); //Adding Argument count to response message
   message += "\n";
   for (uint8_t i = 0; i < server.args(); i++) {
-    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+    message += " " + server.argName(i) + ": " + server.arg(i) + "\n"; //Adding arguments to message
   }
-  server.send(404, "text/plain", message);
+  server.send(404, "text/plain", message); //Sending message with 404 error
 }
 
-void getTempHumValues(){
-  hum = dht.readHumidity();
-  temp = dht.readTemperature();
-  server.send(200, "text/plain", (String) temp);
+/*
+ * Function for getting Temperature Values
+ */
+void getTempValues(){
+  temp = dht.readTemperature(); //Setting temp to current temperature
+  server.send(200, "text/plain", (String) temp); //sending temperature
 }
 
 void setup()
@@ -53,54 +58,31 @@ void setup()
   pinMode(2, OUTPUT);
   digitalWrite(2, 0);
   WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  Serial.println("");
+  WiFi.begin(ssid, password); //Connect to access point
+  Serial.println(""); //Waiting for connection to access point
     while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
   Serial.println("");
   Serial.print("Connected to ");
-  Serial.println(ssid);
+  Serial.println(ssid); //Printing ssid to Serial Monitor
   Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP()); //Printing web-server IP to Serial Monitor
 
-  server.on("/", handleRoot);
+  server.on("/", handleRoot); //Default route
 
-  server.on("/temp", getTempHumValues);
+  server.on("/temp", getTempValues); //Route for temp GET
   
-  server.onNotFound(handleNotFound);
-  server.begin();
+  server.onNotFound(handleNotFound); //Routing for non-existant URI's
+  
+  server.begin(); //Start server
   Serial.println("HTTP server started");
-  
-/*  server.begin();
-  if(WiFi.status() != WL_CONNECTED){
-    Serial.println("Error with WiFI Connection");
-  }*/
-  //Serial.println(WiFi.localIP()); //Gebt diese an die andere Gruppe
-  //dht.begin();
 }
 
 void loop()
 {
   server.handleClient();
-  /*
-  WiFiClient client = server.available();
-  delay(2000);
-  hum = dht.readHumidity();
-  temp = dht.readTemperature();
-  client.flush();
-  String httpmessage = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>";
-  httpmessage += temp;
-  httpmessage += "</html>";
-  client.print(httpmessage);
-  //Print temp and humidity values
-  Serial.print("Humidity: ");
-  Serial.print(hum);
-  Serial.print(" %, Temp: ");
-  Serial.print(temp);
-  Serial.println(" Celsius");
-  delay(15000); //Delay 2 sec.*/
 }
 
    
