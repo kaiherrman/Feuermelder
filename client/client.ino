@@ -35,10 +35,10 @@ void loop() {
 
   http.begin(link);
   int httpCode = http.GET();
-  String payload = http.getString();
+  char* payload = http.getString();
 
   //Example for testing
-  if((int)payload > 20){
+  if((double) payload > 50){
     digitalWrite(13, HIGH);
   }else{
     digitalWrite(13, LOW);
