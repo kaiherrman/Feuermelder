@@ -6,7 +6,7 @@
 const char* ssid = "iPhoneX Kai 2018"; // SSID  of Access Point 
 const char* password = "test12345"; // Password of Access Point
 
-const char* host = "http://172.20.10.4/temp";
+const char* link = "http://172.20.10.4/temp";
 
 void setup() {
   // put your setup code here, to run once:
