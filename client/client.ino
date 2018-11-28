@@ -6,13 +6,14 @@
 const char* ssid = "iPhoneX Kai 2018"; // SSID  of Access Point 
 const char* password = "test12345"; // Password of Access Point
 
-const char* host = "172.20.10.4";
+const char* host = "http://172.20.10.4/temp";
 
 void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(115200);
   pinMode(2, OUTPUT);
+  pinMode(13, OUTPUT);
   digitalWrite(2, 0);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password); //Connect to access point
@@ -32,14 +33,19 @@ void loop() {
   // put your main code here, to run repeatedly:
   HTTPClient http;
 
-  link = "http://" + host + "/temp/";
-
   http.begin(link);
   int httpCode = http.GET();
   String payload = http.getString();
+
+  //Example for testing
+  if((int)payload > 20){
+    digitalWrite(13, HIGH);
+  }else{
+    digitalWrite(13, LOW);
+  }
   
   Serial.println(httpCode);
   Serial.println(payload); 
 
-  http.end()
+  http.end();
 }
