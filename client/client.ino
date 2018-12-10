@@ -35,17 +35,23 @@ void loop() {
 
   http.begin(link);
   int httpCode = http.GET();
-  char* payload = http.getString();
+  String payload = http.getString();
 
   //Example for testing
-  if((double) payload > 50){
+  if( payload.toInt() > 23){
     digitalWrite(13, HIGH);
+    Serial.println("high");
   }else{
     digitalWrite(13, LOW);
+    Serial.println("low");
   }
+  
   
   Serial.println(httpCode);
   Serial.println(payload); 
 
+
   http.end();
+
+  delay(1000);
 }
