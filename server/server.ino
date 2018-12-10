@@ -22,26 +22,7 @@ float temp; //temperature
  * Function for handling empty routes
  */
 void handleRoot() {
-  server.send(200, "text/plain", "this server works!");
-}
-
-/*
- * Function for handling Uri's that don't exist
- * 
- */
-void handleNotFound() {
-  String message = "File Not Found\n\n"; // Declaring server response message
-  message += "URI: ";
-  message += server.uri(); // Adding URI to response message
-  message += "\nMethod: "; 
-  message += (server.method() == HTTP_GET) ? "GET" : "POST"; // Adding Method to reponse message
-  message += "\nArguments: ";
-  message += server.args(); //Adding Argument count to response message
-  message += "\n";
-  for (uint8_t i = 0; i < server.args(); i++) {
-    message += " " + server.argName(i) + ": " + server.arg(i) + "\n"; //Adding arguments to message
-  }
-  server.send(404, "text/plain", message); //Sending message with 404 error
+  server.send(200, "text/plain", "Server working");
 }
 
 /*
@@ -63,7 +44,7 @@ void setup()
     while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-  }
+    }
   Serial.println("");
   Serial.print("Connected to ");
   Serial.println(ssid); //Printing ssid to Serial Monitor
@@ -73,8 +54,6 @@ void setup()
   server.on("/", handleRoot); //Default route
 
   server.on("/temp", getTempValues); //Route for temp GET
-  
-  server.onNotFound(handleNotFound); //Routing for non-existant URI's
   
   server.begin(); //Start server
   Serial.println("HTTP server started");
