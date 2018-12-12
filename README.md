@@ -7,6 +7,9 @@ Mit unserer praktischen Anwendung bekommst du eine Benachrichtung, und du entsch
 Who's a stranger to that: The house is on fire, you're not at home and can't call the fire department.
 With our practical application you get a notification, and you decide yourself between insurance and fire department
 
+---
+
+## Installation Guide
 
 ### General installation
 First you need to download and install the [Arduino IDE](https://www.arduino.cc/en/Main/Software).
@@ -23,3 +26,13 @@ Change your upload speed to 115200 and select the right port.
 After that please upload the client.ino code to the Arduino IDE and upload it to the Arduino. 
 
 <b>Important:</b> Dont forget to change your Access Point Information in the code.
+
+---
+
+## Circuit diagrams 
+
+### Server: 
+![alt text](https://raw.githubusercontent.com/kaiherrman/Feuermelder/master/Feuermelder_server_circuit_diagram.png)
+
+### Client: 
+![alt text](https://raw.githubusercontent.com/kaiherrman/Feuermelder/master/Feuermelder_client_circuit_diagram.png)
