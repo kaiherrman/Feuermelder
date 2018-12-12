@@ -6,19 +6,17 @@
 const char* ssid = "iPhoneX Kai 2018"; // SSID  of Access Point 
 const char* password = "test12345"; // Password of Access Point
 
-const char* link = "http://172.20.10.4/temp";
+const char* link = "http://172.20.10.4/temp"; //The address of the temperature route on the server
 
 void setup() {
-  // put your setup code here, to run once:
-
-  Serial.begin(115200);
-  pinMode(2, OUTPUT);
-  pinMode(13, OUTPUT);
+  Serial.begin(115200); //Set baud rate
+  pinMode(2, OUTPUT); //Set this pin for output
+  pinMode(13, OUTPUT); //Set this pin for output
   digitalWrite(2, 0);
-  WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_STA); //Disable access point functionality for this client
   WiFi.begin(ssid, password); //Connect to access point
-  Serial.println(""); //Waiting for connection to access point
-  while (WiFi.status() != WL_CONNECTED) {
+  Serial.println(""); //Begin new line
+  while (WiFi.status() != WL_CONNECTED) {  //Waiting for connection to access point
     delay(500);
     Serial.print(".");
   }
@@ -30,28 +28,26 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  HTTPClient http;
+  HTTPClient http; //Create instance of HTTPClient
 
-  http.begin(link);
-  int httpCode = http.GET();
-  String payload = http.getString();
+  http.begin(link); //Begin connection to predefined link
+  int httpCode = http.GET(); //Save http response code from request
+  String payload = http.getString(); //Set payload to temperature from request
 
   //Example for testing
-  if( payload.toInt() > 23){
-    digitalWrite(13, HIGH);
+  if( payload.toInt() > 50){ //If temperature is higher than 50°C
+    digitalWrite(13, HIGH); //Set pin 13 to high
     Serial.println("high");
-  }else{
-    digitalWrite(13, LOW);
+  }else{ //If temperature is lower than 51°C
+    digitalWrite(13, LOW); //Set pin 13 to low
     Serial.println("low");
   }
-  
-  
-  Serial.println(httpCode);
-  Serial.println(payload); 
+ 
+  Serial.println(httpCode); //Print http response code
+  Serial.println(payload);  //Print temperature
 
 
-  http.end();
+  http.end(); //End http connection
 
-  delay(1000);
+  delay(1000); //wait 1 second
 }
