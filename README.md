@@ -2,6 +2,8 @@
 <img src="https://raw.githubusercontent.com/kaiherrman/Feuermelder/master/logo.png" alt="" style="max-width:100%" width="auto" height="150">
 
 ![Build Status](https://travis-ci.org/dwyl/esta.svg?branch=master)
+![version](https://img.shields.io/badge/version-1.0.0-blue.svg?maxAge=2592000)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
 <b>Deutsch:</b><br>
 Wer kennt das nicht, das Haus brennt, du bist nicht zuhause und kannst die Feuerwehr nicht rufen.
