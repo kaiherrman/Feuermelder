@@ -31,7 +31,9 @@ After that please upload the server.ino code to the Arduino IDE and upload it to
 Change your upload speed to 115200 and select the right port.
 After that please upload the client.ino code to the Arduino IDE and upload it to the Arduino. 
 
-<b>Important:</b> Dont forget to change your Access Point Information in the code.
+<b>Important:</b> 
+- Don't forget to change your Access Point Information in the code.
+- Don't forget to update the address of the server inside the client code. The server will print the address inside the serial monitor.
 
 ---
 
