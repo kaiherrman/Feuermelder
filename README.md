@@ -25,11 +25,11 @@ After that you have to install the Adafruit Huzzah 8266 support. Please follow t
 First you need to install the DMT.h libary (Version 1.2.3).
 We are using an old version because the new version isn't working, see [Issue](https://github.com/adafruit/DHT-sensor-library/issues/62 ).
 Change your upload speed to 115200 and select the right port.
-After that please upload the server.ino code to the Arduino IDE and upload it to the Arduino.
+After that please copy the server.ino code into the Arduino IDE and upload it to the Arduino.
 
 ### Client (Actuator) installation:
 Change your upload speed to 115200 and select the right port.
-After that please upload the client.ino code to the Arduino IDE and upload it to the Arduino. 
+After that please copy the client.ino code into the Arduino IDE and upload it to the Arduino. 
 
 <b>Important:</b> 
 - Don't forget to change your Access Point Information in the code.
