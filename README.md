@@ -22,7 +22,7 @@ First you need to download and install the [Arduino IDE](https://www.arduino.cc/
 After that you have to install the Adafruit Huzzah 8266 support. Please follow this [instruction](https://arduino-esp8266.readthedocs.io/en/latest/installing.html).
 
 ### Server (Sensor) installation: 
-First you need to install the DMT.h libary (Version 1.2.3).
+First you need to install the [DMT.h libary](https://github.com/adafruit/DHT-sensor-library) (Version 1.2.3).
 We are using an old version because the new version isn't working, see [Issue](https://github.com/adafruit/DHT-sensor-library/issues/62 ).
 Change your upload speed to 115200 and select the right port.
 After that please copy the server.ino code into the Arduino IDE and upload it to the Arduino.
